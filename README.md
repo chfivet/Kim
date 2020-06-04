@@ -22,4 +22,5 @@ git pull origin master
 Create New Branch
 -----------------------------------------------------------------------------
 On Master Branch
+
 git checkout -b issue#1
