@@ -1,16 +1,14 @@
+from django.contrib.auth.models import User
 from django.db import models
-from django.forms import DateField
 
 
 class Person (models.Model):
-    date_last_change = models.DateField(auto_now=True)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    gender = models.CharField(max_length=5, choices= [
-        ('HOMME', 'Homme'),
-        ('FEMME', 'Femme'),
-    ])
+    birth_date = models.DateField(auto_now=False, null=True)
+    changed = models.DateTimeField(auto_now=True)
     email = models.EmailField(max_length=254)
-    phone = models.TextField(max_length=10)
-    phone_mob = models.TextField(max_length=10)
-    birth_date = models.DateTimeField(auto_now=False, auto_now_add=False)
+    first_name = models.CharField(max_length=50, blank=True, null=True, db_index=True)
+    last_name = models.CharField(max_length=50, blank=True, null=True, db_index=True)
+    middle_name = models.CharField(max_length=50, blank=True, null=True)
+    phone = models.TextField(max_length=30, null=True)
+    phone_mob = models.TextField(max_length=30, null=True)
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, blank=True, null=True)
