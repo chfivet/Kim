@@ -1,5 +1,12 @@
+from django.contrib import admin
 from django.contrib.auth.models import User
 from django.db import models
+
+
+class PersonAdmin(admin.ModelAdmin):
+    list_display = ('changed', 'email', 'first_name', 'last_name', 'middle_name', 'user')
+    search_fields = ['email', 'first_name', 'last_name', 'middle_name', 'user__username']
+    raw_id_fields = ['user']
 
 
 class Person (models.Model):
