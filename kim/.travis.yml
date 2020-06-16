@@ -1,0 +1,22 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=5252aca7a79804cda5fb62117c32d2a423c58efe06a1e67c17e40d18123659c7
+
+language: python
+python: "3.5.5"
+cache: pip
+
+install:
+  - "pip install -r requirements.txt"
+
+before_script:
+  - "psql -d template1 -c 'create extension unaccent;' -U postgres"
+  - "curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter"
+  - "chmod +x ./cc-test-reporter"
+  - "./cc-test-reporter before-build"
+
+script: "python3 manage.py migrate && python3 manage.py compilemessages && coverage run manage.py test --exclude-tag=selenium --no-logs"
+
+after_script:
+  - "coverage xml"
+  - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
