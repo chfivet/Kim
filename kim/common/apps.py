@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class PersonConfig(AppConfig):
+class CommonConfig(AppConfig):
     name = 'common'
