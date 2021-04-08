@@ -1,2 +1,2 @@
-django==2.2.13
+django==2.2.20
 coverage==4.5.1
